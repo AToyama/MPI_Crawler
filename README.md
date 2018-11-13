@@ -1,5 +1,5 @@
-# WebCrawler
-Web crawler em c++
+# WebCrawler Distribuido
+Web crawler em c++ distribuido com OpenMPI
 Projeto da matéria de supercomputação
 INSPER
 
