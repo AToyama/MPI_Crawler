@@ -13,7 +13,7 @@ O objetivo é realizar uma análise de desempenho comparando uma versão sequenc
 
 * [cpr](https://whoshuu.github.io/cpr/) - Fazer o download das páginas HTML
 * [Boost Regex](https://theboostcpplibraries.com/boost.regex) - Realizar o parsing dos HTML
-* [mpi](https://www.open-mpi.org/faq/?category=mpi-apps) - Realizar a diviso em processos
+* [mpi](https://www.open-mpi.org/faq/?category=mpi-apps) - Realizar a divisão em processos
 
 ### Instalação
 
