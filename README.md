@@ -13,7 +13,7 @@ O objetivo é realizar uma análise de desempenho comparando uma versão sequenc
 
 * [cpr](https://whoshuu.github.io/cpr/) - Fazer o download das páginas HTML
 * [Boost Regex](https://theboostcpplibraries.com/boost.regex) - Realizar o parsing dos HTML
-* [mprof](https://pypi.org/project/memory_profiler/) - Usado para os teste de memória
+* [mpi](https://www.open-mpi.org/faq/?category=mpi-apps) - Realizar a diviso em processos
 
 ### Instalação
 
@@ -28,7 +28,7 @@ Esse projeto é compilado utilizando CMake, ao entrar no diretório clonado comp
 $ cmake .
 $ make
 ```
-Isso irá gerar dois executáveis "seq_crawler" e "par_crawler", que são respectivamente as versões sequencial e paralela do projeto.
+Isso irá gerar dois executáveis "seq_crawler" e "mpi_crawler", que são respectivamente as versões sequencial e paralela do projeto.
 
 ## Executando os testes
 
@@ -45,6 +45,13 @@ Alguns exemplos de links válidos:
 - https://www.submarino.com.br/categoria/eletrodomesticos/geladeira-refrigerador
 - https://www.submarino.com.br/categoria/instrumentos-musicais/violao
 
+O exemplo usado para os teste de memória foi o seguinte:
+
+- https://www.submarino.com.br/categoria/automotivo/mini-geladeira-automotiva
+
+Com 114 produtos.
+
+
 Para executar o programa:
 
 **Sequencial:**
@@ -53,17 +60,13 @@ Para executar o programa:
 $ ./seq_crawler <https://www.submarino.com.br/categoria/[ categoria ]/[ sub-categoria ]>
 ```
 
-**Paralelo:**
+**MPI:**
 
 ```
-$ ./par_crawler <https://www.submarino.com.br/categoria/[ categoria ]/[ sub-categoria ]>
+$ mpiexec -n [numero de processos] ./mpi_crawler <https://www.submarino.com.br/categoria/[ categoria ]/[ sub-categoria ]>
 ```
+O número de processos não pode ser menor que 2.
 
-No paralelo também temos a opção de selecionar o número de threads para executar o programa, por padrão ele é 4, mas podemos atribuir isso a partir de um váriavel de ambiente da seguinte maneira (exemplo para 8  threads) :
-
-```
-$ NUM_THREADS=8 ./par_crawler <https://www.submarino.com.br/categoria/[ categoria ]/[ sub-categoria ]>
-```
 ## Dados:
 
 Como saída do programa teremos para cada produto um json no seguinte formato:
@@ -87,23 +90,3 @@ E as seguintes medidas de tempo
 - Tempo médio de todos produtos
 - Tempo total ocioso do programa (tempo para o download de todas as páginas)
 - Tempo de execução total do programa
-
-## Teste de Memória:
-
-Para realizar os teste de memória basta colocar o seguinte comando antes do executável
-
-```
-$ mprof run ./[executavel] [URL]
-```
-
-O programa irá rodar normalmente, para gerar o gráfico de consumo de memória basta esperar o programa acabar de rodar e executar:
-
-```
-$ mprof plot
-```
-
-Para a versão paralela do programa deve ser levada em conta que se for utilizar a variável de ambiente NUM_THREADS, ela deve ser declarada antes do comando do teste de memória, da seguinte maneira:
-
-```
-$ NUM_THREADS=[] mprof run ./[executavel] [URL]
-```
